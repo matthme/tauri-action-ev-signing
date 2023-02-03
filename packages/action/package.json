@@ -1,7 +1,7 @@
 {
-  "name": "tauri-action",
-  "version": "0.3.1",
-  "description": "Tauri GitHub Action",
+  "name": "tauri-action-ev-signing-matthme",
+  "version": "0.0.1",
+  "description": "Tauri GitHub Action that skips the build command",
   "author": "Lucas Nogueira <lucas@tauri.studio>",
   "license": "MIT",
   "main": "dist/index.js",
