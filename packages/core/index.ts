@@ -97,12 +97,14 @@ export function execCommand(
   args: string[],
   { cwd }: { cwd?: string } = {}
 ): Promise<void> {
-  console.log(`running ${command}`, args);
-  return execa(command, args, {
-    cwd,
-    stdio: 'inherit',
-    env: { FORCE_COLOR: '0' },
-  }).then();
+  console.log("Skipping build command");
+  return Promise.resolve();
+  // console.log(`running ${command}`, args);
+  // return execa(command, args, {
+  //   cwd,
+  //   stdio: 'inherit',
+  //   env: { FORCE_COLOR: '0' },
+  // }).then();
 }
 
 interface CargoManifestBin {
