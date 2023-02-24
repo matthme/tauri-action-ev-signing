@@ -22,7 +22,7 @@ export default async function uploadAssets(
     })
   ).data;
 
-  console.log(`@fork: @uploadAssets(): existingAssets:\n${existingAssets}`);
+  console.log(`@fork: @uploadAssets(): existingAssets:\n${JSON.stringify(existingAssets)}`);
 
   // Determine content-length for header to upload asset
   const contentLength = (filePath: string) => fs.statSync(filePath).size;
@@ -49,16 +49,22 @@ export default async function uploadAssets(
     console.log(`@fork: @uploadAssets(): Uploading asset with assetName:\n${assetName}`);
 
 
-    await github.rest.repos.uploadReleaseAsset({
-      headers,
-      name: assetName,
-      // https://github.com/tauri-apps/tauri-action/pull/45
-      // @ts-ignore error TS2322: Type 'Buffer' is not assignable to type 'string'.
-      data: fs.readFileSync(asset.path),
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      release_id: releaseId,
-    });
+    try {
+      await github.rest.repos.uploadReleaseAsset({
+        headers,
+        name: assetName,
+        // https://github.com/tauri-apps/tauri-action/pull/45
+        // @ts-ignore error TS2322: Type 'Buffer' is not assignable to type 'string'.
+        data: fs.readFileSync(asset.path),
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        release_id: releaseId,
+      });
+
+    } catch (e) {
+      console.log(`@fork: @uploadAssets(): Uploading failed with error:\n${e}`);
+      console.log(`@fork: @uploadAssets(): Uploading failed with stringified error:\n${JSON.stringify(e)}`);
+    }
 
     console.log(`@fork: @uploadAssets():Successfully uploaded asset with assetName:\n${assetName}`);
 
