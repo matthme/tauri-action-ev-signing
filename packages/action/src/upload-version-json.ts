@@ -121,4 +121,5 @@ export default async function uploadVersionJSON({
 
   console.log(`Uploading ${versionFile}...`);
   await uploadAssets(releaseId, [{ path: versionFile, arch: '' }]);
+  console.log(`@fork Successfully uploaded Asset ${versionFile}`);
 }

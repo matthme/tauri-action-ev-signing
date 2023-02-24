@@ -22,6 +22,8 @@ export default async function uploadAssets(
     })
   ).data;
 
+  console.log(`@fork: @uploadAssets(): existingAssets:\n${existingAssets}`);
+
   // Determine content-length for header to upload asset
   const contentLength = (filePath: string) => fs.statSync(filePath).size;
 
@@ -44,6 +46,8 @@ export default async function uploadAssets(
     }
 
     console.log(`Uploading ${assetName}...`);
+    console.log(`@fork: @uploadAssets(): Uploading asset with assetName:\n${assetName}`);
+
 
     await github.rest.repos.uploadReleaseAsset({
       headers,
@@ -55,5 +59,8 @@ export default async function uploadAssets(
       repo: context.repo.repo,
       release_id: releaseId,
     });
+
+    console.log(`@fork: @uploadAssets():Successfully uploaded asset with assetName:\n${assetName}`);
+
   }
 }
