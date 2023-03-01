@@ -45,14 +45,13 @@ export default async function uploadAssets(
       });
     }
 
-    const modifiedAssetName = assetName.substring(0, assetName.length - 4) + "_signed.msi";
 
-    console.log(`@fork: @uploadAssets(): Uploading asset with modified assetName:\n${assetName}`);
+    console.log(`@fork: @uploadAssets(): Uploading asset with assetName:\n${assetName}`);
 
     try {
       await github.rest.repos.uploadReleaseAsset({
         headers,
-        name: modifiedAssetName,
+        name: assetName,
         // https://github.com/tauri-apps/tauri-action/pull/45
         // @ts-ignore error TS2322: Type 'Buffer' is not assignable to type 'string'.
         data: fs.readFileSync(asset.path),
