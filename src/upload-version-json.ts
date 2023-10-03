@@ -177,6 +177,7 @@ export async function uploadVersionJSON({
     await uploadAssets(owner, repo, releaseId, [
       { path: versionFile, arch: '' },
     ]);
+    console.log(`@upload-only fork: Successfully uploaded Asset ${versionFile}`);
   } else {
     const missing = downloadUrl
       ? 'Signature'

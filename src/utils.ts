@@ -144,13 +144,14 @@ export function execCommand(
   args: string[],
   { cwd }: { cwd?: string } = {}
 ): Promise<void> {
-  console.log(`running ${command}`, args);
 
-  return execa(command, args, {
-    cwd,
-    stdio: 'inherit',
-    env: { FORCE_COLOR: '0' },
-  }).then();
+  console.log(`@upload-only fork: Skipping command ${command} with args`, args);
+  return Promise.resolve();
+  // return execa(command, args, {
+  //   cwd,
+  //   stdio: 'inherit',
+  //   env: { FORCE_COLOR: '0' },
+  // }).then();
 }
 
 export function getInfo(
